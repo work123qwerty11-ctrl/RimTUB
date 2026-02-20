@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Системные зависимости для сборки и медиа
+# Системные зависимости для сборки и работы с медиа
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -14,7 +14,7 @@ COPY . .
 # Удаляем файл с хэшами, который мешал сборке
 RUN rm -f requirements.txt
 
-# Ставим все модули. Добавил convopyro и pyTelegramBotAPI
+# Устанавливаем ВСЕ необходимые библиотеки разом
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
