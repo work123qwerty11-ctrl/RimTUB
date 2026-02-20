@@ -1,10 +1,10 @@
 FROM python:3.11-slim
 
-WORKDIR /app
+# Меняем папку на /bot, чтобы сбросить все старые привязки
+WORKDIR /bot
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Установка всех библиотек разом
 RUN pip install --no-cache-dir \
     pyrogram==2.0.106 \
     TgCrypto \
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir \
 
 COPY . .
 
-# Команда очистки старых файлов перед запуском
-RUN rm -f RimTUB.session RimTUB.session-journal
+# Принудительно удаляем всё, что похоже на старые сессии
+RUN rm -f *.session*
 
 CMD ["python", "main.py"]
