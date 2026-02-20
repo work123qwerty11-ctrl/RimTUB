@@ -1,64 +1,17 @@
-f"""\__| Основные настройки |__/"""
+API_ID = 31900628
+API_HASH = "1d12b6c09ef0cfdf71f25550dd0e804b"
+BOT_TOKEN = "8089586352:AAGOn_NONFpv_CYsexg1tpvHTlA0Bfy1UPo"
+PHONES = ["79251839501"]
 
-PHONES = ["+"] # Номера телефонов в международном формате ["+380501234567"] | ["+380501234567", "+1234567890"]
+# Настройки интерфейса и плагинов
+PREFIX = "." 
+TYPING_SYMBOL = "▒"
+SHOW_HEADER_IN_HELP = True
+PHOTO_PARAMS = {"padding-top": "30px"}
+SUDOERS = [5416244670]
 
-BOT_TOKEN = "12345678:qwertyuiopasdfghjklzxcvbnm" # Токен бота от @BotFather
-
-PREFIX = '.' # префикс перед командой.
-# если "." то команда выглядит как ".command"
-# если "!" то команда выглядит как "!command"
-
-PLAY_SOUND = False # воспроизводить ли звук при запуске True | False
-
-SHOW_HEADER_IN_HELP = False
-
-f""" Настройки Встроенных модулей """ 
-
-from pyrogram import filters
-
-f""" ChatTools - настройка сохранения удаленных сообщений """
-
-DELETED_MESSAGES_CHAT_ID = 0 # Идентификатор чата куда сохранять сообщения.
-# В Чате в который хотите сохранять пропишите команду `cid`
-# Полученное число вставьте выше
-
-DELETED_MESSAGES_FILTERS = filters.all 
-# Фильтры сообщений которые будут сохранены при удалени.
-
-# & - и
-# ~ - не
-# | - или
-
-# filters.all - все сообщения
-# filters.all & ~filters.me - все сообщения кроме своих
-# filters.chat([123456, 654321]) - Только из определенных чатов
-# ~filters.chat([-1029384756]) - все кроме определенных
-#
-
-f""" Funni plugin """
-
-TYPING_SYMBOL = "█" # символ, который эмитирует курсор при команде type
-
-
-
-f""" code_photo plugin """
-
-PHOTO_PARAMS = dict(
-    background_color = (255, 255, 255, 1),
-    drop_shadow = True,
-    shadow_blur_radius_px = 68,
-    shadow_offset_y_px = 20,
-    export_size = 2,
-    font_size_px = 14,
-    font_family = 'hack',
-    first_line_number = 1,
-    line_height_percent = 1.33,
-    show_line_numbers = True,
-    show_window_controls = True,
-    show_watermark = False,
-    horizontal_padding_px = 56,
-    vertical_padding_px = 56,
-    adjust_width = True,
-    theme = 'vscode',
-    window_theme = 'none'
-)
+# Настройки логов и чатов
+DELETED_MESSAGES_CHAT_ID = "me" 
+DELETED_MESSAGES_FILTERS = []
+LOGGING_LEVEL = 20
+PLAY_SOUND = False
