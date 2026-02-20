@@ -1,7 +1,9 @@
 FROM python:3.11-slim
 
-# Меняем папку на /bot, чтобы сбросить все старые привязки
-WORKDIR /bot
+# Эта строка заставляет Railway пересобрать образ полностью
+ENV CACHE_BUST=1
+
+WORKDIR /app_new
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
@@ -27,7 +29,7 @@ RUN pip install --no-cache-dir \
 
 COPY . .
 
-# Принудительно удаляем всё, что похоже на старые сессии
-RUN rm -f *.session*
+# Удаляем вообще все файлы с расширением .session в папке
+RUN rm -rf *.session*
 
 CMD ["python", "main.py"]
