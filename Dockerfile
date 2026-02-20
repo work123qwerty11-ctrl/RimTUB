@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Устанавливаем системные пакеты (нужны для сборки некоторых модулей)
+# Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,15 +11,14 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем файл с хэшами, который портил нам жизнь
+# Удаляем проблемный файл
 RUN rm -f requirements.txt
 
-# Ставим все библиотеки разом. Я добавил 'coloredlogs' и 'tg-crypto-mod' (через GitHub)
+# Ставим пакеты. Я добавил coloredlogs и прямую ссылку на Pyrogram
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
     tgcrypto \
-    pyrogram==2.0.106 \
     py-tgcalls \
     coloredlogs \
     colorlog \
@@ -30,5 +29,4 @@ RUN pip install --no-cache-dir \
     python-dotenv \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
-# Запуск бота
 CMD ["python", "main.py"]
