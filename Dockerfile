@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Системные зависимости
+# Системные зависимости для компиляции и работы с медиа
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем файл с хэшами
+# Удаляем файл с хэшами, чтобы он не мешал
 RUN rm -f requirements.txt
 
-# Устанавливаем библиотеки
+# Устанавливаем все библиотеки. Добавлена pyTelegramBotAPI
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -30,6 +30,7 @@ RUN pip install --no-cache-dir \
     aiosqlite \
     sqlalchemy \
     typing-extensions \
+    pyTelegramBotAPI \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
 CMD ["python", "main.py"]
