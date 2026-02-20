@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Устанавливаем системные зависимости
+# Устанавливаем системные пакеты
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем проблемный файл
+# Удаляем файл, который вызывал ошибку хэшей
 RUN rm -f requirements.txt
 
-# Ставим пакеты. Я добавил coloredlogs и прямую ссылку на Pyrogram
+# Ставим все модули, включая aiosqlite и coloredlogs
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -27,6 +27,8 @@ RUN pip install --no-cache-dir \
     requests \
     Pillow \
     python-dotenv \
+    aiosqlite \
+    sqlalchemy \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
 CMD ["python", "main.py"]
