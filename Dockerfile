@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Системные зависимости для компиляции и работы с медиа
+# Системные зависимости для сборки и медиа
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем файл с хэшами, чтобы он не мешал
+# Удаляем файл с хэшами, который мешал сборке
 RUN rm -f requirements.txt
 
-# Устанавливаем все библиотеки. Добавлена pyTelegramBotAPI
+# Ставим все модули. Добавил convopyro и pyTelegramBotAPI
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -31,6 +31,7 @@ RUN pip install --no-cache-dir \
     sqlalchemy \
     typing-extensions \
     pyTelegramBotAPI \
+    convopyro \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
 CMD ["python", "main.py"]
