@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# Устанавливаем системные пакеты, чтобы библиотеки могли собраться
+# Устанавливаем системные пакеты
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем проблемный файл с хэшами
+# Удаляем файл с хэшами
 RUN rm -f requirements.txt
 
-# Обновляем pip и ставим все нужные библиотеки одной командой
+# Обновляем pip и ставим только существующие библиотеки
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -22,11 +22,11 @@ RUN pip install --no-cache-dir \
     py-tgcalls \
     coloredlogs \
     colorlog \
-    tg-crypto-mod \
     aiohttp \
     aiofiles \
     requests \
-    Pillow
+    Pillow \
+    python-dotenv
 
 # Запуск бота
 CMD ["python", "main.py"]
