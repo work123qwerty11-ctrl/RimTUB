@@ -4,9 +4,9 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем ВООБЩЕ ВСЁ разом
+# Устанавливаем всё самое важное напрямую
 RUN pip install --no-cache-dir \
-    pygram==2.0.106 \
+    pyrogram==2.0.106 \
     TgCrypto \
     pytimeparse \
     coloredlogs \
@@ -16,13 +16,11 @@ RUN pip install --no-cache-dir \
     python-weather \
     pyTelegramBotAPI \
     aiohttp \
-    pillow \
-    aiofiles \
-    aiosqlite \
-    APScheduler \
-    pydantic \
-    requests
+    pillow
 
 COPY . .
+
+# Если что-то забыли, доставим из файла
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "main.py"]
