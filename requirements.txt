@@ -1,9 +1,15 @@
+pyrogram==2.0.106
+TgCrypto==1.2.5
 pytimeparse==1.1.8
 beautifulsoup4==4.12.3
 googletrans==4.0.0-rc1
 python-weather==1.1.2
 pyTelegramBotAPI==4.18.1
-Pyrogram==2.0.106
-TgCrypto==1.2.5
 aiohttp==3.9.3
 pillow
+aiofiles==23.2.1
+aiosignal==1.3.1
+aiosqlite==0.19.0
+APScheduler==3.10.4
+pydantic==2.6.0
+requests==2.31.0
