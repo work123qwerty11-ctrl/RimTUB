@@ -1,6 +1,6 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Устанавливаем системные пакеты
+# Системные зависимости
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем файл, который вызывал ошибку хэшей
+# Удаляем файл с хэшами
 RUN rm -f requirements.txt
 
-# Ставим все модули, включая aiosqlite и coloredlogs
+# Устанавливаем библиотеки
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir \
     python-dotenv \
     aiosqlite \
     sqlalchemy \
+    typing-extensions \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
 CMD ["python", "main.py"]
