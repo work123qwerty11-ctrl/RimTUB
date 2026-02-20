@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем всё самое важное напрямую
+# Устанавливаем всё, включая convopyro и g4f
 RUN pip install --no-cache-dir \
     pyrogram==2.0.106 \
     TgCrypto \
@@ -16,11 +16,15 @@ RUN pip install --no-cache-dir \
     python-weather \
     pyTelegramBotAPI \
     aiohttp \
-    pillow
+    pillow \
+    convopyro \
+    g4f \
+    pyaes \
+    pycryptodome \
+    aiofiles \
+    aiosqlite \
+    APScheduler
 
 COPY . .
-
-# Если что-то забыли, доставим из файла
-RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "main.py"]
