@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Системные зависимости для сборки и работы с медиа
+# Устанавливаем системные зависимости для работы с медиа и сборки модулей
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY . .
 
-# Удаляем файл с хэшами, который мешал сборке
+# Удаляем старый файл зависимостей, чтобы избежать ошибок с хэшами
 RUN rm -f requirements.txt
 
-# Устанавливаем ВСЕ необходимые библиотеки разом
+# Устанавливаем ВСЕ необходимые модули одной командой
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir \
     flask \
@@ -34,4 +34,5 @@ RUN pip install --no-cache-dir \
     convopyro \
     https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.21.zip
 
+# Команда запуска
 CMD ["python", "main.py"]
