@@ -2,14 +2,27 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Устанавливаем зависимости системы
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Сначала копируем только requirements и устанавливаем их
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Устанавливаем ВООБЩЕ ВСЁ разом
+RUN pip install --no-cache-dir \
+    pygram==2.0.106 \
+    TgCrypto \
+    pytimeparse \
+    coloredlogs \
+    humanfriendly \
+    beautifulsoup4 \
+    googletrans==4.0.0-rc1 \
+    python-weather \
+    pyTelegramBotAPI \
+    aiohttp \
+    pillow \
+    aiofiles \
+    aiosqlite \
+    APScheduler \
+    pydantic \
+    requests
 
-# Копируем остальной код
 COPY . .
 
 CMD ["python", "main.py"]
