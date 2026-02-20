@@ -4,7 +4,6 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем всё, включая convopyro и g4f
 RUN pip install --no-cache-dir \
     pyrogram==2.0.106 \
     TgCrypto \
@@ -26,5 +25,8 @@ RUN pip install --no-cache-dir \
     APScheduler
 
 COPY . .
+
+# Удаляем файл сессии, если он вдруг остался старым, чтобы создать новый
+RUN rm -f RimTUB.session
 
 CMD ["python", "main.py"]
