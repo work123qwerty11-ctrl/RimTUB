@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 
-# Ставим всё необходимое
+# Установка всех библиотек разом
 RUN pip install --no-cache-dir \
     pyrogram==2.0.106 \
     TgCrypto \
@@ -27,7 +27,7 @@ RUN pip install --no-cache-dir \
 
 COPY . .
 
-# Удаляем остатки старой базы данных перед запуском
+# Команда очистки старых файлов перед запуском
 RUN rm -f RimTUB.session RimTUB.session-journal
 
 CMD ["python", "main.py"]
